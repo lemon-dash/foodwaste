@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>食堂剩饭检测系统</title>
+    <style>
+        /* 定义转圈等待动画 */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .spinner {
+            border: 16px solid #f3f3f3; /* 轻灰色 */
+            border-top: 16px solid #3498db; /* 蓝色 */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 2s linear infinite;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+        }
+        /* 设置图片固定大小 */
+        #resultImage {
+            display: none;
+            max-width: 500px; /* 设置最大宽度 */
+            height: auto; /* 保持宽高比例 */
+        }
+        /* 设置视频固定大小 */
+        #resultVideo {
+            display: none;
+            max-width: 500px; /* 设置最大宽度 */
+            height: auto; /* 保持宽高比例 */
+        }
+        /* 添加文本标签样式 */
+        #resultText {
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #3498db;
+        }
+        #downloadButton {
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>上传图片或视频</h1>
+    <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" required>
+        <button type="submit">上传</button>
+    </form>
+    <div class="spinner" id="spinner"></div>
+    <img id="resultImage" src="" alt="Detection Result">
+    <video id="resultVideo" controls></video>
+    <div id="resultText"></div> <!-- 添加文本标签 -->
+    <button id="downloadButton" style="display: none;">下载文件</button>
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            // 显示转圈等待动画
+            document.getElementById('spinner').style.display = 'block';
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // 隐藏转圈等待动画
+                document.getElementById('spinner').style.display = 'none';
+                console.log(data);
+                if (data.output_pth) {
+                    // 根据文件类型选择显示图片或视频
+                    if (data.output_pth.endsWith('.jpg') || data.output_pth.endsWith('.png') || data.output_pth.endsWith('.jpeg')) {
+                        document.getElementById('resultImage').src = data.output_pth;
+                        document.getElementById('resultImage').style.display = 'block';
+                        document.getElementById('resultVideo').style.display = 'none';
+                         // 显示检测结论
+                    document.getElementById('resultText').innerText = data.conclusion || '检测完成，未找到结论信息';
+                    } else if (data.output_pth.endsWith('.mp4') || data.output_pth.endsWith('.avi')) {
+                        document.getElementById('resultVideo').src = data.output_pth;
+                        document.getElementById('resultVideo').style.display = 'block';
+                        document.getElementById('resultImage').style.display = 'none';
+                        document.getElementById('downloadButton').style.display = 'block';
+                        document.getElementById('downloadButton').addEventListener('click', function() {
+                            window.location.href = data.output_pth;
+                        });
+                    } else {
+                        document.getElementById('resultText').innerText = '不支持的文件类型';
+                    }
+                }
+            })
+            .catch(error => {
+                // 隐藏转圈等待动画
+                document.getElementById('spinner').style.display = 'none';
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+H:\food_waste/data/images/food_18.jpg
+H:\food_waste/data/images/food_23.jpg
+H:\food_waste/data/images/food_24.jpg
+H:\food_waste/data/images/food_33.jpg
+H:\food_waste/data/images/food_48.jpg
+H:\food_waste/data/images/food_50.jpg
+H:\food_waste/data/images/food_55.jpg
+H:\food_waste/data/images/food_67.jpg
+H:\food_waste/data/images/food_71.jpg
+H:\food_waste/data/images/food_79.jpg
+H:\food_waste/data/images/food_92.jpg
+H:\food_waste/data/images/food_97.jpg

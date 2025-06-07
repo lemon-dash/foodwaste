@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>摄像头检测</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        input {
+            margin: 10px;
+            padding: 5px;
+        }
+        button {
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>摄像头检测</h1>
+    <p>摄像头 IP 地址: <input type="text" id="cameraIp" value="" ></p>
+    <button onclick="sendCameraIp()">连接</button>
+    <h1>Video Stream</h1>
+    <video id="videoPlayer" width="640" height="480" autoplay></video>
+    <script>
+        // 从 localStorage 或 session 获取摄像头 IP 地址
+        const cIp = localStorage.getItem('camera_ip') || '默认 IP 地址';
+        document.getElementById('cameraIp').value = cIp;
+
+        function sendCameraIp() {
+            const cameraIpValue = document.getElementById('cameraIp').value;
+            //如果两次ip不同，newip为true
+            if (cameraIpValue !== cIp) {
+                const newIp = true;
+            } else {
+                const newIp = false;
+            }
+            // 发送摄像头 IP 地址到服务器
+            fetch('/camera_datection', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ camera_ip: cameraIpValue, newIp: newIp })
+            })
+            const videoPlayer = document.getElementById('videoPlayer');
+            const videoSrc = 'ws://localhost:5000/video_feed';
+            videoPlayer.src = videoSrc;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+train: H:/food_waste/data/train.txt
+val: H:/food_waste/data/val.txt
+test: H:/food_waste/data/test.txt
+
+nc: 5 # 填写类别数
+
+names:
+  0: plate
+  1: mild
+  2: moderate
+  3: severe
+  4: tissue        # 要和voc_label.py中的类别数目顺序一模一样
+
+# train,val,test的路径根据自己情况而定
