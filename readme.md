@@ -43,23 +43,23 @@
 ![img](runs/detect/train5/train_batch2.jpg)
 
 <center>混淆矩阵</center>
-![confusion_matrix](\runs\detect\train6\confusion_matrix.png)
+![confusion_matrix](runs\detect\train6\confusion_matrix.png)
 <center>F1-score</center>
 ![F1_curve](runs\detect\train6\F1_curve.png)
 
 ## 测试示例
 
-![food_20](\runs\detect\predict5\food_20.jpg)
+![food_20](runs\detect\predict5\food_20.jpg)
 
 ## 模型部署
 
-![1](\data\1.png)
+![1](data\1.png)
 
-![2](\data\2.png)
+![2](data\2.png)
 
 支持IP摄像头实时检测和视频检测，moni_detected.mp4
 
-![3](\data\3.png)
+![3](data\3.png)
 
 ## 版权信息
 
