@@ -39,7 +39,7 @@
 
 ## 模型训练
 
-![train_batch0](\runs\detect\train5\train_batch0.jpg)
+![train_batch0](.\runs\detect\train5\train_batch0.jpg)
 ![img](runs/detect/train5/train_batch2.jpg)
 
 <center>混淆矩阵</center>
