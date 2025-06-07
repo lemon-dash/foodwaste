@@ -39,11 +39,11 @@
 
 ## 模型训练
 
-![train_batch0](.\runs\detect\train5\train_batch0.jpg)
+![train_batch0](runs\detect\train5\train_batch0.jpg)
 ![img](runs/detect/train5/train_batch2.jpg)
 
 <center>混淆矩阵</center>
-![confusion_matrix](.\runs\detect\train6\confusion_matrix.png)
+![confusion_matrix](runs\detect\train6\confusion_matrix.png)
 <center>F1-score</center>
 ![F1_curve](runs\detect\train6\F1_curve.png)
 
